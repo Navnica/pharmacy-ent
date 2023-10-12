@@ -17,7 +17,7 @@ def index() -> fastapi.responses.RedirectResponse:
 
 if __name__ == '__main__':
     if settings.DEBUG:
-        from src.server.database.dbfill import dbfill
-        dbfill()
+        from src.server.database.db_fill import db_fill
+        db_fill()
 
     uvicorn.run('server:app', reload=True, host=settings.SERVER_HOST, port=settings.SERVER_PORT)

@@ -30,7 +30,6 @@ class Staff(BaseModel):
 class Product(BaseModel):
     name: peewee.CharField = peewee.CharField(null=False)
     price: peewee.FloatField = peewee.FloatField(null=False)
-    count: peewee.IntegerField = peewee.IntegerField(null=False)
 
 
 class UserOrder(BaseModel):
@@ -57,6 +56,7 @@ class UserDiscount(BaseModel):
 
 class StorageOrder(BaseModel):
     productID: peewee.ForeignKeyField = peewee.ForeignKeyField(Product, related_name='storage_order_product_id')
+    storageID: peewee.ForeignKeyField = peewee.ForeignKeyField(Storage, related_name='storage_order_storage_id')
     count: peewee.IntegerField = peewee.IntegerField(null=False)
 
 
@@ -75,5 +75,6 @@ db.create_tables([
     Discount,
     Storage,
     StorageOrder,
-    ProductInStorage
+    ProductInStorage,
+    UserDiscount
 ])
