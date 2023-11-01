@@ -1,7 +1,7 @@
 import uvicorn
 import fastapi
 import settings
-
+from src.server.router import routers
 
 app = fastapi.FastAPI(
     title='PharmancyEnt api',
@@ -9,6 +9,7 @@ app = fastapi.FastAPI(
     description='PharamancyEntAPI - PharamancyEnt Application Programming Interface'
 )
 
+[app.include_router(router) for router in routers]
 
 @app.get('/', include_in_schema=False)
 def index() -> fastapi.responses.RedirectResponse:

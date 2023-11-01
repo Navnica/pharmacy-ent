@@ -17,17 +17,17 @@ def db_fill():
     AuthData.create(
         login="1",
         password="1",
-        userID=User.get(User.id == 1)
+        user_id=User.get(User.id == 1)
     )
 
     AuthData.create(
         login="2",
         password="2",
-        userID=User.get(User.id == 2)
+        user_id=User.get(User.id == 2)
     ).save()
 
     Staff.create(
-        userID=User.get(User.id == 1)
+        user_id=User.get(User.id == 1)
     )
 
     Product.create(
@@ -44,31 +44,31 @@ def db_fill():
 
     UserOrder.create(
         count=1,
-        userID=User.get(User.id == 2),
-        productID=Product.get(Product.id == 2)
+        user_id=User.get(User.id == 2),
+        product_id=Product.get(Product.id == 2)
     )
 
     Discount.create(
-        productID=Product.get(Product.id == 1),
+        product_id=Product.get(Product.id == 1),
         percent=20,
         active=True
     )
 
     Discount.create(
-        productID=Product.get(Product.id == 2),
+        product_id=Product.get(Product.id == 2),
         percent=20,
         active=False
     )
 
     UserDiscount.create(
-        userID=User.get(User.id == 1),
-        productID=Product.get(Product.id == 1),
+        user_id=User.get(User.id == 1),
+        product_id=Product.get(Product.id == 1),
         percent=5
     )
 
     UserDiscount.create(
-        userID=User.get(User.id == 2),
-        productID=Product.get(Product.id == 2),
+        user_id=User.get(User.id == 2),
+        product_id=Product.get(Product.id == 2),
         percent=5
     )
 
@@ -77,13 +77,13 @@ def db_fill():
     )
 
     StorageOrder.create(
-        productID=Product.get(Product.id == 1),
-        storageID=Storage.get(Storage.id == 1),
+        product_id=Product.get(Product.id == 1),
+        storage_id=Storage.get(Storage.id == 1),
         count=10
     )
 
     ProductInStorage.create(
-        productID=Product.get(Product.id == 1),
-        storageID=Storage.get(Storage.id == 1),
+        product_id=Product.get(Product.id == 1),
+        storage_id=Storage.get(Storage.id == 1),
         count=1000
     )

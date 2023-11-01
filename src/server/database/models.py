@@ -16,6 +16,7 @@ class User(BaseModel):
     regular: peewee.BooleanField = peewee.BooleanField(default=False)
 
 
+
 class AuthData(BaseModel):
     login: peewee.CharField = peewee.CharField(null=False)
     password: peewee.CharField = peewee.CharField(null=False)
