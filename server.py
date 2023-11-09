@@ -3,13 +3,15 @@ import fastapi
 import settings
 from src.server.router import routers
 
+
 app = fastapi.FastAPI(
     title='PharmancyEnt api',
-    version='0.1 Startis',
+    version='1.0 Server',
     description='PharamancyEntAPI - PharamancyEnt Application Programming Interface'
 )
 
 [app.include_router(router) for router in routers]
+
 
 @app.get('/', include_in_schema=False)
 def index() -> fastapi.responses.RedirectResponse:

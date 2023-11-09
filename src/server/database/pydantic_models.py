@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 
+
 class BaseModelModify(BaseModel):
     id: Optional[int] = 1
 
