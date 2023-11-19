@@ -2,6 +2,7 @@ from src.server.database import models as database_models
 from src.server.database import pydantic_models
 from src.server.service import *
 
+
 routers = (
     RouterManager(
         database_model=database_models.User,

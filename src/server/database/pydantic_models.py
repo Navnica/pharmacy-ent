@@ -60,3 +60,8 @@ class ProductInStorage(BaseModelModify):
     product_id: int
     storage_id: int
     count: int
+
+
+class LoginData(BaseModel):
+    login: str
+    password: str

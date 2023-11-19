@@ -1,7 +1,7 @@
 import uvicorn
 import fastapi
 import settings
-from src.server.router import routers
+from src.server.advanced_import import *
 
 
 app = fastapi.FastAPI(
