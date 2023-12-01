@@ -12,3 +12,9 @@ SERVER_PORT: int = 5050
 
 DATABASE_PATH: str = './src/server/database/'
 DATABASE_NAME: str = 'database.db'
+
+
+# CLIENT SETTINGS
+
+CLIENT_PATH: str = './src/client'
+IMG_DIR: str = './src/client/img'

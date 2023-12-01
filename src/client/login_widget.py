@@ -1,43 +1,32 @@
-from PySide6 import QtWidgets
-from PySide6.QtCore import Qt
+from PySide6 import QtCore, QtWidgets
 
 
 class LoginWidget(QtWidgets.QWidget):
-
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent: QtWidgets.QWidget) -> None:
+        super(LoginWidget, self).__init__(parent)
         self.init_ui()
+        self.show()
 
-    def init_ui(self):
+    def init_ui(self) -> None:
+        main_layout = QtWidgets.QHBoxLayout()
+        input_layout_label = QtWidgets.QVBoxLayout()
+        input_layout_line_edit = QtWidgets.QVBoxLayout()
 
-        # Init layouts
+        self.setLayout(main_layout)
+        main_layout.addLayout(input_layout_label)
+        main_layout.addLayout(input_layout_line_edit)
 
-        self.main_layout = QtWidgets.QVBoxLayout()
-        self.line_edit_label_layout = QtWidgets.QHBoxLayout()
-        self.line_edit_layout = QtWidgets.QVBoxLayout()
-        self.label_layout = QtWidgets.QVBoxLayout()
+        login_label = QtWidgets.QLabel("Логин")
+        password_label = QtWidgets.QLabel("Пароль")
+        login_line_edit = QtWidgets.QLineEdit()
+        password_line_edit = QtWidgets.QLineEdit()
 
-        # Init elements
+        input_layout_label.addWidget(login_label)
+        input_layout_label.addWidget(password_label)
+        input_layout_line_edit.addWidget(login_line_edit)
+        input_layout_line_edit.addWidget(password_line_edit)
 
-        self.login_label = QtWidgets.QLabel(self)
-        self.password_label = QtWidgets.QLabel(self)
-        self.login_line_edit = QtWidgets.QLineEdit(self)
-        self.password_line_edit = QtWidgets.QLineEdit(self)
+        password_line_edit.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
 
-        # Setting layouts
-
-        self.setLayout(self.main_layout)
-        self.main_layout.addLayout(self.line_edit_label_layout)
-        self.line_edit_label_layout.addLayout(self.label_layout)
-        self.line_edit_label_layout.addLayout(self.line_edit_layout)
-        self.label_layout.addWidget(self.login_label)
-        self.label_layout.addWidget(self.password_label)
-        self.line_edit_layout.addWidget(self.login_line_edit)
-        self.line_edit_layout.addWidget(self.password_line_edit)
-        self.line_edit_label_layout.setAlignment(Qt.AlignmentFlag.AlignBottom)
-
-        # Setting elements
-
-        self.login_label.setText('Login')
-        self.password_label.setText('Password')
-        self.password_line_edit.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
+        main_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom)
+        main_layout.setContentsMargins(0, 0, 0, 0)
