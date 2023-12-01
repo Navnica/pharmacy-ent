@@ -2,6 +2,11 @@ from PySide6 import QtCore, QtWidgets
 
 
 class RegisterWidget(QtWidgets.QWidget):
+    fullname_line_edit: QtWidgets.QLineEdit
+    login_line_edit: QtWidgets.QLineEdit
+    password_line_edit: QtWidgets.QLineEdit
+    confirm_line_edit: QtWidgets.QLineEdit
+
     def __init__(self, parent) -> None:
         super(RegisterWidget, self).__init__(parent)
         self.init_ui()
@@ -20,10 +25,10 @@ class RegisterWidget(QtWidgets.QWidget):
         login_label = QtWidgets.QLabel("Логин")
         password_label = QtWidgets.QLabel("Пароль")
         confirm_label = QtWidgets.QLabel("Ещё раз")
-        fullname_line_edit = QtWidgets.QLineEdit()
-        login_line_edit = QtWidgets.QLineEdit()
-        password_line_edit = QtWidgets.QLineEdit()
-        confirm_line_edit = QtWidgets.QLineEdit()
+        self.fullname_line_edit = QtWidgets.QLineEdit()
+        self.login_line_edit = QtWidgets.QLineEdit()
+        self.password_line_edit = QtWidgets.QLineEdit()
+        self.confirm_line_edit = QtWidgets.QLineEdit()
 
         # Setting layouts
 
@@ -35,15 +40,15 @@ class RegisterWidget(QtWidgets.QWidget):
         label_layout.addWidget(login_label)
         label_layout.addWidget(password_label)
         label_layout.addWidget(confirm_label)
-        line_edit_layout.addWidget(fullname_line_edit)
-        line_edit_layout.addWidget(login_line_edit)
-        line_edit_layout.addWidget(password_line_edit)
-        line_edit_layout.addWidget(confirm_line_edit)
+        line_edit_layout.addWidget(self.fullname_line_edit)
+        line_edit_layout.addWidget(self.login_line_edit)
+        line_edit_layout.addWidget(self.password_line_edit)
+        line_edit_layout.addWidget(self.confirm_line_edit)
         line_edit_label_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom)
 
         # Setting elements
 
-        password_line_edit.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
-        confirm_line_edit.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
+        self.password_line_edit.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
+        self.confirm_line_edit.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
 
         main_layout.setContentsMargins(0, 0, 0, 0)

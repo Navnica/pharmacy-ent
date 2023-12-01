@@ -8,5 +8,5 @@ user_router: FastAPI = routers[1]
 
 
 @user_router.post('/login', response_model=int | dict)
-def login(login_str, password):
-    return auth_data.login(login_str, password)
+def login(login_data: LoginData) -> int | dict:
+    return auth_data.login(login_data.login, login_data.password)

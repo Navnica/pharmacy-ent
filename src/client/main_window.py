@@ -2,13 +2,25 @@ from PySide6 import QtWidgets, QtCore
 from src.client.info_widget import InfoWidget
 from src.client.page_list_widget import PageListWidget
 import settings
+from src.client.api.session import Session
 
 
 class MainWindow(QtWidgets.QWidget):
+    session: Session = Session()
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.init_ui()
-        self.show()
+
+        if self.session.server_available:
+            self.show()
+        else:
+            QtWidgets.QMessageBox(
+                QtWidgets.QMessageBox.Icon.Critical,
+                "Ошибка",
+                'Сервер недоступен'
+            ).exec_()
+            exit()
 
     def init_ui(self):
         self.setWindowTitle("PharmacyEnt App")

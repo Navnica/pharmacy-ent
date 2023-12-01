@@ -42,20 +42,57 @@ class AuthWidget(QtWidgets.QWidget):
         register_button.clicked.connect(self.on_register_click)
 
     def on_register_click(self) -> None:
-        if self.register_widget.isVisible():
-            pass
-
-        self.login_widget.hide()
-        self.register_widget.show()
-
-    def on_login_click(self) -> None:
-        if self.login_widget.isVisible():
-            l = login(
-                self.login_widget.login_line_edit.text(),
-                self.login_widget.password_line_edit.text()
-            )
-
+        if not self.register_widget.isVisible():
+            self.login_widget.hide()
+            self.register_widget.show()
             return
 
-        self.login_widget.show()
-        self.register_widget.hide()
+        if self.register_widget.password_line_edit.text() != self.register_widget.confirm_line_edit.text():
+            QtWidgets.QMessageBox(
+                QtWidgets.QMessageBox.Icon.Critical,
+                "Ошибка",
+                "Пароль и подтверждение не совпадают"
+            ).exec_()
+            return
+
+        if (self.register_widget.fullname_line_edit.text() == "" or self.register_widget.login_line_edit.text() == ""
+                or self.register_widget.password_line_edit.text() == "" or self.register_widget.confirm_line_edit == ""):
+            QtWidgets.QMessageBox(
+                QtWidgets.QMessageBox.Icon.Critical,
+                "Ошибка",
+                "Одно или несколько обязательных полей пусты"
+            ).exec_()
+            return
+
+        register(
+            self.register_widget.fullname_line_edit.text(),
+            self.register_widget.login_line_edit.text(),
+            self.register_widget.password_line_edit.text()
+        )
+
+        self.on_login_click()  # Just switch to login
+
+        QtWidgets.QMessageBox(
+            QtWidgets.QMessageBox.Icon.Information,
+            "Успех",
+            "Успешная регистрация"
+        ).exec_()
+
+    def on_login_click(self) -> None:
+        if not self.login_widget.isVisible():
+            self.login_widget.show()
+            self.register_widget.hide()
+            return
+
+        session = self.parent().parent().session
+        session.login(
+            login_str=self.login_widget.login_line_edit.text(),
+            password=self.login_widget.password_line_edit.text()
+        )
+
+        if session.error != '':
+            QtWidgets.QMessageBox(
+                QtWidgets.QMessageBox.Icon.Critical,
+                "Ошибка",
+                'Неверный логин или пароль'
+            ).exec_()

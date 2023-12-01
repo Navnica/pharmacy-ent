@@ -1,5 +1,4 @@
 import requests
-from requests import Response
 import json
 import settings
 
@@ -18,25 +17,43 @@ def server_available(func):
 
 
 @server_available
-def register(fullname: str, login: str, password: str) -> dict:
-    data = [('id', 0)]
-    data = f'{{"id": 0, "fullname": "{fullname}", "balance": 100, "regular": false}}'
+def check_connection():
+    return True
 
-    return requests.post(
+
+@server_available
+def register(fullname: str, login_str: str, password: str) -> bool:
+    new_user_data = {'id': 0, 'fullname': fullname, 'balance': 1000, 'regular': False}
+
+    new_user_answer = requests.post(
         url=f'{server_url}/user/create',
-        data=data
-    ).json()
+        data=json.dumps(new_user_data)
+    )
+
+    new_auth_data = {'id': 0, 'login': login_str, 'password': password, 'user_id': new_user_answer.json()['id']}
+
+    new_auth_answer = requests.post(
+        url=f'{server_url}/auth_data/create',
+        data=json.dumps(new_auth_data)
+    )
+
+    return True
 
 
 @server_available
 def login(login_str: str, password: str) -> int:
-    data = {'login': login_str, 'password': password}
+    data = {"login": login_str, "password": password}
 
     answer = requests.post(
         url=f'{server_url}/auth_data/login',
         data=json.dumps(data)
     )
 
-    print(answer.text)
+    return answer.json()
 
-    return 1
+
+@server_available
+def get_user_by_id(id: int) -> dict:
+    return requests.get(
+        url=f'{server_url}/user/get/{id}'
+    ).json()
