@@ -2,6 +2,9 @@ from PySide6 import QtCore, QtWidgets
 
 
 class LoginWidget(QtWidgets.QWidget):
+    login_line_edit: QtWidgets.QLineEdit
+    password_line_edit: QtWidgets.QLineEdit
+
     def __init__(self, parent: QtWidgets.QWidget) -> None:
         super(LoginWidget, self).__init__(parent)
         self.init_ui()
@@ -18,15 +21,15 @@ class LoginWidget(QtWidgets.QWidget):
 
         login_label = QtWidgets.QLabel("Логин")
         password_label = QtWidgets.QLabel("Пароль")
-        login_line_edit = QtWidgets.QLineEdit()
-        password_line_edit = QtWidgets.QLineEdit()
+        self.login_line_edit = QtWidgets.QLineEdit()
+        self.password_line_edit = QtWidgets.QLineEdit()
 
         input_layout_label.addWidget(login_label)
         input_layout_label.addWidget(password_label)
-        input_layout_line_edit.addWidget(login_line_edit)
-        input_layout_line_edit.addWidget(password_line_edit)
+        input_layout_line_edit.addWidget(self.login_line_edit)
+        input_layout_line_edit.addWidget(self.password_line_edit)
 
-        password_line_edit.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
+        self.password_line_edit.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
 
         main_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom)
         main_layout.setContentsMargins(0, 0, 0, 0)

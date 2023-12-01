@@ -1,1 +1,1 @@
-from src.server.advanced.routers.user import *
+from src.server.advanced.routers.auth_data import *

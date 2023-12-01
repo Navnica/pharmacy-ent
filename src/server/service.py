@@ -1,6 +1,5 @@
 import fastapi
 import peewee
-
 from src.server.database.models import BaseModel
 from src.server.database.pydantic_models import BaseModelModify
 from typing import Type

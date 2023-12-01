@@ -1,11 +1,12 @@
 from PySide6 import QtCore, QtWidgets
 from src.client.register_widget import RegisterWidget
 from src.client.login_widget import LoginWidget
+from src.client.api.resolvers import register, login
 
 
 class AuthWidget(QtWidgets.QWidget):
-    login_widget: QtWidgets.QWidget
-    register_widget: QtWidgets.QWidget
+    login_widget: LoginWidget
+    register_widget: RegisterWidget
 
     def __init__(self, parent: QtWidgets.QWidget) -> None:
         super(AuthWidget, self).__init__(parent)
@@ -42,13 +43,18 @@ class AuthWidget(QtWidgets.QWidget):
 
     def on_register_click(self) -> None:
         if self.register_widget.isVisible():
-            return
+            pass
 
         self.login_widget.hide()
         self.register_widget.show()
 
     def on_login_click(self) -> None:
         if self.login_widget.isVisible():
+            l = login(
+                self.login_widget.login_line_edit.text(),
+                self.login_widget.password_line_edit.text()
+            )
+
             return
 
         self.login_widget.show()
